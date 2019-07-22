@@ -3,6 +3,8 @@ package req
 import (
 	"crypto/tls"
 	"errors"
+
+	"go.uber.org/zap"
 	"net"
 	"net/http"
 	"net/http/cookiejar"
@@ -48,6 +50,16 @@ func Client() *http.Client {
 // SetClient sets the underlying http.Client.
 func (r *Req) SetClient(client *http.Client) {
 	r.client = client // use default if client == nil
+}
+
+// SetLogger sets the logging.
+func (r *Req) SetLogger(logger *zap.Logger) {
+	r.logger = logger
+}
+
+// SetLogger sets the logging.
+func SetLogger(logger *zap.Logger) {
+	std.SetLogger(logger)
 }
 
 // SetClient sets the default http.Client for requests.
